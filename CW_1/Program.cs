@@ -40,7 +40,7 @@ namespace CW_1
 
                 if (!result.IsSuccessStatusCode) return;
 
-                //Kolekcje 
+                //Kolekcje ////
                 var zbiory = new HashSet<string>();
                 var listy = new List<string>();
                 var slownik = new Dictionary<string, int>();
