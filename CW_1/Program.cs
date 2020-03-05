@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -31,23 +32,35 @@ namespace CW_1
 
 
             // Console.WriteLine("Hello World!");
-
-            var client = new HttpClient();
-            var result =await client.GetAsync("https://www.pja.edu.pl");
-
-
-            if (!result.IsSuccessStatusCode) return;
-
-            string html = await result.Content.ReadAsStringAsync();
-            var regex = new Regex("[a-z]+[a-z0-9]*@[a-z.]+", RegexOptions.IgnoreCase);
-
-            var mathches = regex.Matches(html);
-
-            foreach(var m in mathches)
+            try
             {
-                Console.WriteLine(m);
-            }
+                var client = new HttpClient();
+                var result = await client.GetAsync("https://www.pja.edu.pl");
 
+
+                if (!result.IsSuccessStatusCode) return;
+
+                //Kolekcje 
+                var zbiory = new HashSet<string>();
+                var listy = new List<string>();
+                var slownik = new Dictionary<string, int>();
+
+                string html = await result.Content.ReadAsStringAsync();
+                var regex = new Regex("[a-z]+[a-z0-9]*@[a-z.]+", RegexOptions.IgnoreCase);
+
+                var mathches = regex.Matches(html);
+
+                foreach (var m in mathches)
+                {
+                    Console.WriteLine(m);
+                }
+            }catch(Exception ex)
+            {
+                string s = string.Format("wystapil blad {0}", ex.ToString()); // tak mozna laczyc strigi 
+                Console.WriteLine("Wystapil blad" + ex.ToString()); // tak nie robmy
+
+                Console.WriteLine($"Wystapil blad{ex.ToString()}"); // tak najlpeiej laczyc stringi 
+            }
 
             Console.WriteLine("Koniec!");
 
