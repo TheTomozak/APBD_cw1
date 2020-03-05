@@ -5,11 +5,29 @@ using System.Threading.Tasks;
 
 namespace CW_1
 {
+
+    public class Student
+    {
+        public string Imie { get; set; }
+
+        private string _nazwisko;
+
+        public string Nazwsiko
+        {
+            get { return _nazwisko; }
+            set
+            {
+                //if (value == null) throw new ArgumentException();
+                _nazwisko = value;
+            }
+        }
+    }
     public class Program
     {
         public static async Task Main(string[] args)
         {
 
+            string url = args.Length > 0 ? args [0] : "https://www.pja.edu.pl";
 
 
             // Console.WriteLine("Hello World!");
